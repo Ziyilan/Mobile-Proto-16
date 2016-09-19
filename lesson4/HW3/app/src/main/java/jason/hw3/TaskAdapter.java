@@ -2,23 +2,31 @@ package jason.hw3;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by zlan on 9/18/16.
  */
 public class TaskAdapter extends ArrayAdapter<String> {
+    @BindView(R.id.buttonDel) Button deleteBut;
+    @BindView(R.id.buttonComplete) Button completeBut;
+    @BindView(R.id.template_content) TextView text;
+    @BindView(R.id.checkimg) ImageView img;
 
     private ArrayList<String> tasklist;
 
@@ -31,14 +39,12 @@ public class TaskAdapter extends ArrayAdapter<String> {
     public View getView(final int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
         final String task = getItem(position);
+
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.task_template, parent, false);
         }
-
-        Button deleteBut = (Button) convertView.findViewById(R.id.buttonDel);
-        Button completeBut = (Button) convertView.findViewById(R.id.buttonComplete);
-        TextView text = (TextView) convertView.findViewById(R.id.template_content);
+        ButterKnife.bind(this, convertView);
 
         text.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,13 +75,26 @@ public class TaskAdapter extends ArrayAdapter<String> {
             }
         });
 
+//        delete button listener
         deleteBut.setOnClickListener(new View.OnClickListener() {
-                                         @Override
-                                         public void onClick(View view) {
-                                             tasklist.remove(position);
-                                             notifyDataSetChanged();
-                                         }
-                                     });
+             @Override
+             public void onClick(View view) {
+//                 remove item
+                 tasklist.remove(position);
+//                 remove the imageview in the item
+                 img.setVisibility(View.GONE);
+//                 update adapter
+                 notifyDataSetChanged();
+             }
+         });
+        completeBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                reveal checkmark
+                img.setVisibility(View.VISIBLE);
+                notifyDataSetChanged();
+            }
+        });
 
                 createTask(convertView, task);
 
@@ -86,10 +105,6 @@ public class TaskAdapter extends ArrayAdapter<String> {
     private void createTask(View convertView, String task){
         TextView Task = (TextView) convertView.findViewById(R.id.template_content);
         Task.setText(task);
-    }
-
-    public void edit(String str, int index){
-        tasklist.set(index,str);
     }
 
 }

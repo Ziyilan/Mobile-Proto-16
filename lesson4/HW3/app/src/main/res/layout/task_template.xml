@@ -14,9 +14,12 @@
             android:id="@+id/template_content" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView" />
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:id="@+id/checkimg"
+            android:src="@drawable/check"
+            android:layout_marginTop="25px"
+            android:visibility="invisible"/>
 
         <Button
             android:layout_width="wrap_content"

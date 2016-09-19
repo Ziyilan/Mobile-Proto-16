@@ -19,10 +19,17 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
+//    bindview variables
+    @BindView(R.id.list_task) ListView listView;
+    @BindView(R.id.button) Button myButton;
+    @BindView(R.id.buttonAdd) Button addButton;
 
     public MainActivityFragment() {
     }
@@ -34,15 +41,15 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+//        initiate butter knife
+        ButterKnife.bind(this, view);
         tasks = new ArrayList<String>();
         taskAdapter = new TaskAdapter(getActivity(),tasks);
-        ListView listView = (ListView) view.findViewById(R.id.list_task);
         listView.setAdapter(taskAdapter);
 
 
 
 //        set the setting button
-        Button myButton = (Button) view.findViewById(R.id.button);
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +59,6 @@ public class MainActivityFragment extends Fragment {
             }
         });
 
-        Button addButton = (Button) view.findViewById(R.id.buttonAdd);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
