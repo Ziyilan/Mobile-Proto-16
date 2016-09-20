@@ -3,11 +3,8 @@ package jason.hw3;
 import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,150 +32,13 @@ public class MainActivityFragment extends Fragment {
         final TextView text4 = (TextView) view.findViewById(R.id.textView4);
         final TextView text5 = (TextView) view.findViewById(R.id.textView5);
 
-//        set the click listener for the first textview
-        text1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                alertDialog.setTitle("Edit Task");
-                // Set up the input
-                final EditText input = new EditText(v.getContext());
-                // Specify the type of input expected;
-                input.setInputType(InputType.TYPE_CLASS_TEXT);
-                alertDialog.setView(input);
-                // Set up the buttons
-                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,"OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String str = input.getText().toString();
-                        text1.setText(str); //update the corresponding textview
-                    }
-                });
-                alertDialog.show();
-            }
-        });
 
-        //        set the click listener for the second textview
-        text2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                alertDialog.setTitle("Edit Task");
-                // Set up the input
-                final EditText input = new EditText(v.getContext());
-                // Specify the type of input expected
-                input.setInputType(InputType.TYPE_CLASS_TEXT);
-                alertDialog.setView(input);
-                // Set up the buttons
-                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,"OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String str = input.getText().toString();
-                        text2.setText(str);
-                    }
-                });
-                alertDialog.show();
-            }
-        });
-
-        //        set the click listener for the third textview
-        text3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                alertDialog.setTitle("Edit Task");
-                // Set up the input
-                final EditText input = new EditText(v.getContext());
-                // Specify the type of input expected
-                input.setInputType(InputType.TYPE_CLASS_TEXT);
-                alertDialog.setView(input);
-                // Set up the buttons
-                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,"OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String str = input.getText().toString();
-                        text3.setText(str);
-                    }
-                });
-                alertDialog.show();
-            }
-        });
-
-        //        set the click listener for the fourth textview
-        text4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                alertDialog.setTitle("Edit Task");
-                // Set up the input
-                final EditText input = new EditText(v.getContext());
-                // Specify the type of input expected
-                input.setInputType(InputType.TYPE_CLASS_TEXT);
-                alertDialog.setView(input);
-                // Set up the buttons
-                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,"OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String str = input.getText().toString();
-                        text4.setText(str);
-                    }
-                });
-                alertDialog.show();
-            }
-        });
-
-        //        set the click listener for the fifth textview
-        text5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                alertDialog.setTitle("Edit Task");
-                // Set up the input
-                final EditText input = new EditText(v.getContext());
-                // Specify the type of input expected
-                input.setInputType(InputType.TYPE_CLASS_TEXT);
-                alertDialog.setView(input);
-                // Set up the buttons
-                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,"OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String str = input.getText().toString();
-                        text5.setText(str);
-                    }
-                });
-                alertDialog.show();
-            }
-        });
+        // Look how clean this is!
+        text1.setOnClickListener(new CustomOnClick(text1));
+        text2.setOnClickListener(new CustomOnClick(text2));
+        text3.setOnClickListener(new CustomOnClick(text3));
+        text4.setOnClickListener(new CustomOnClick(text4));
+        text5.setOnClickListener(new CustomOnClick(text5));
 
 //        set the setting button
         Button myButton = (Button) view.findViewById(R.id.button);
@@ -193,5 +53,39 @@ public class MainActivityFragment extends Fragment {
 
 
         return view;
+    }
+
+    private class CustomOnClick implements View.OnClickListener {
+        private TextView t;
+
+        public CustomOnClick(TextView t) {
+            this.t = t;
+        }
+
+        @Override
+        public void onClick(View v) {
+            AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+            alertDialog.setTitle("Edit Task");
+            // Set up the input
+            final EditText input = new EditText(v.getContext());
+            // Specify the type of input expected
+            input.setInputType(InputType.TYPE_CLASS_TEXT);
+            alertDialog.setView(input);
+            // Set up the buttons
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Cancel",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,"OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String str = input.getText().toString();
+                    t.setText(str);
+                }
+            });
+            alertDialog.show();
+        }
     }
 }
