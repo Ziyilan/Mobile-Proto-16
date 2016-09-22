@@ -50,6 +50,7 @@ public class MainActivityFragment extends Fragment {
 
 
 //        set the setting button
+        // Consider using more descriptive variable names than 'myButton'
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +71,7 @@ public class MainActivityFragment extends Fragment {
                 input.setInputType(InputType.TYPE_CLASS_TEXT);
                 alert.setView(input);
                 // Set up the buttons
+                // Extract string resources to strings.xml
                 alert.setButton(AlertDialog.BUTTON_POSITIVE, "Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -91,6 +93,7 @@ public class MainActivityFragment extends Fragment {
         return view;
     }
 
+    // Nice - good to encapsulate this into a method
     public void addTask(String str){
         tasks.add(str);
         taskAdapter.notifyDataSetChanged();

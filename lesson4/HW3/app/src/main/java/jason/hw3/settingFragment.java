@@ -23,9 +23,12 @@ import android.widget.Button;
 public class settingFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    // Unneccessary and unused - delete
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+
+    // When copying a template, make sure to get rid of all the default code in there, e.g. mParam1, mParam2
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -36,6 +39,7 @@ public class settingFragment extends Fragment {
         // Required empty public constructor
     }
 
+    // Delete this as well - there's a lot of unnecessary code in this fragment
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -65,6 +69,12 @@ public class settingFragment extends Fragment {
 
     }
 
+
+    /*
+    This would have been a great place to put all of the color switching functionality in one place -
+    the same 8 lines are written out three times, whereas you could have written a function that takes in a
+    color parameter and does all of the color switching logic inside.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -116,6 +126,7 @@ public class settingFragment extends Fragment {
         return view;
     }
 
+    // Again, unnecessary and unused
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

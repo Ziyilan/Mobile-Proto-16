@@ -23,11 +23,15 @@ import butterknife.ButterKnife;
  * Created by zlan on 9/18/16.
  */
 public class TaskAdapter extends ArrayAdapter<String> {
+    // Stick to the same convention for id names - either underscores or camelCase
     @BindView(R.id.buttonDel) Button deleteBut;
     @BindView(R.id.buttonComplete) Button completeBut;
+    // Use more descriptive variable names
     @BindView(R.id.template_content) TextView text;
+    // Use more descriptive variable names
     @BindView(R.id.checkimg) ImageView img;
 
+    // Camel case for variable names like thie - e.g. taskList
     private ArrayList<String> tasklist;
 
     public TaskAdapter(Context context, ArrayList<String> tasks) {
@@ -50,6 +54,7 @@ public class TaskAdapter extends ArrayAdapter<String> {
             @Override
             public void onClick(View view) {
                 AlertDialog alertDialog = new AlertDialog.Builder(view.getContext()).create();
+                // Extract to strings.xml resource file
                 alertDialog.setTitle("Edit Task");
                 // Set up the input
                 final EditText input = new EditText(view.getContext());
@@ -75,6 +80,8 @@ public class TaskAdapter extends ArrayAdapter<String> {
             }
         });
 
+        // Comments should be fully inline for easier code readability
+//        Not like this one
 //        delete button listener
         deleteBut.setOnClickListener(new View.OnClickListener() {
              @Override
