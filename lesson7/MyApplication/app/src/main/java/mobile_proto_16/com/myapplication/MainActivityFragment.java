@@ -1,6 +1,7 @@
 package mobile_proto_16.com.myapplication;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -23,6 +25,7 @@ import butterknife.ButterKnife;
 
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Console;
 
@@ -68,26 +71,52 @@ public class MainActivityFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = buildSearchURL(input.getText().toString());
-                // YOUR CODE HERE.
-                //
+//                format the ticker from text box into query url
+                String ticker = buildSearchURL(input.getText().toString());
+
                 // Create a StringRequest using the URL and the listeners declared above.
                 // Add the request to your RequestQueue from your MySingleton class
+
+                // Request a string response from the provided URL.
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, ticker,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+//                                    convert the response from string to json
+                                    JSONObject jsonObject = new JSONObject(response);
+//                                    extract current price
+                                    price.setText(jsonObject.getString("l_fix"));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e(TAG, error.toString());
+                    }
+                });
+//              create an instance of singleton and add the request to request queue
+                MySingleton singleton = MySingleton.getInstance(c);
+                singleton.addToRequestQueue(stringRequest);
             }
         });
 
         return view;
     }
-
+//format the company ticker to a query url
     private String buildSearchURL(String companyTicker) {
-        // YOUR CODE HERE
-        // USE URIBuilder
-        return "";
-    }
-
-    private String extractPriceFromJSON(JSONArray array) throws JSONException {
-        // Your code here. Extract the price value from the JSON array
-        return "";
+        Uri.Builder builder = new Uri.Builder();
+        Log.d("company", companyTicker);
+        builder.scheme("http")
+                .authority("finance.google.com")
+                .appendPath("finance")
+                .appendPath("info")
+                .appendQueryParameter("client","iq")
+                .appendQueryParameter("q",companyTicker);
+        Log.d("url",builder.build().toString() );
+        return builder.build().toString();
     }
 
 }
