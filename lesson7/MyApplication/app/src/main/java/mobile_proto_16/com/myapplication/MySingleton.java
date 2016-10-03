@@ -29,7 +29,7 @@ public class MySingleton {
             // Activity or BroadcastReceiver if someone passes one in.
             mRequestQueue = Volley.newRequestQueue(mCtx.getApplicationContext());
         }
-        
+
         return mRequestQueue;
     }
 
