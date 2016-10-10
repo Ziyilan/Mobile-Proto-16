@@ -73,6 +73,12 @@ public class settingFragment extends Fragment {
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPref.edit();
 
+        /*
+        There's a lot of unnecessary code reuse here - consider encapsulating the color changing and sharedprefs
+        part into a single method that maybe takes in a color and does all the work from there. This should
+        help get rid of a lot of the repetition.
+         */
+
         // set the color buttons in this fragment
         Button myButton1 = (Button) view.findViewById(R.id.button2);
         myButton1.setOnClickListener(new View.OnClickListener() {

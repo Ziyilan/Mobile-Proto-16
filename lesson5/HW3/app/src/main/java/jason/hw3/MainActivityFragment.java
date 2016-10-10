@@ -30,10 +30,12 @@ import java.util.StringTokenizer;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+// Get rid of boilerplate placeholder comments like the one below
 /**
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
+    // Unnecessary comment
 //    bindview variables
     @BindView(R.id.list_task) ListView listView;
     @BindView(R.id.button) Button myButton;
@@ -50,6 +52,7 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+        // Unnecessary level of commenting, only comment when it's unclear what the line is doing
 //        initiate butter knife
         ButterKnife.bind(this, view);
 
@@ -70,6 +73,7 @@ public class MainActivityFragment extends Fragment {
             mainView.setBackgroundColor(Color.GREEN);
         }
 
+        // Comments should be indented the same as other lines
 
 //        tasks = new ArrayList<String>();
         todoTable = new toDoHelper(this.getContext());
@@ -123,6 +127,7 @@ public class MainActivityFragment extends Fragment {
     public void addTask(String str){
         tasks.add(str);
         SQLiteDatabase db = todoTable.getWritableDatabase();
+        // Why is this line commented out?
 //        todoTable.addToDo(db,str);
         ContentValues values = new ContentValues();
         values.put(todoSchema.todoEntry.columnOne, str);
@@ -131,6 +136,10 @@ public class MainActivityFragment extends Fragment {
         taskAdapter.notifyDataSetChanged();
     }
 
+    /*
+     This functionality dealing with the database should all be inside the helper. It shouldn't be a fragment's
+     responsibility to deal directly with the database and perform queries.
+      */
     private ArrayList<String> loadToDos(){
         SQLiteDatabase readDb = todoTable.getReadableDatabase();
         ArrayList<String> res = new ArrayList<String>();
@@ -156,6 +165,11 @@ public class MainActivityFragment extends Fragment {
         return res;
     }
 
+    /*
+     Again, this shouldn't be in the fragment  (it should be in the TodoHelper
+     You shouldn't be dealing with database queries here
+     Also, it doesn't seem like this method is actually doing anything to add the todos to the database...
+      */
     private void addItem(ArrayList<String> todos, Cursor cursor){
         String content = cursor.getString(cursor.getColumnIndexOrThrow(todoSchema.todoEntry.columnOne));
         String status = cursor.getString(cursor.getColumnIndexOrThrow(todoSchema.todoEntry.columnTwo));

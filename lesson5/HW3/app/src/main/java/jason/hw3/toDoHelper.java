@@ -7,6 +7,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by zlan on 9/26/16.
  */
+
+/*
+Java classes should always be capitalized
+ */
 public class toDoHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
