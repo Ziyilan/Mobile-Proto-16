@@ -17,10 +17,11 @@
         android:id="@+id/textView" />
 
     <ImageView
+        // Try to stay away from using px for layouts - dp is better
         android:layout_width="400px"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
-        android:src="@drawable/Emperor"
+        android:src="@drawable/emperor"
         android:layout_marginBottom="264dp"
         android:layout_alignBottom="@+id/imageView"
         android:layout_alignParentLeft="true"
@@ -29,7 +30,7 @@
         android:layout_width="400px"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
-        android:src="@drawable/Galápagos"
+        android:src="@drawable/galapagos"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

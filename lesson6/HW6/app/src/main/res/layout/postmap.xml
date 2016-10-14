@@ -6,6 +6,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        // Be more thoughtful about your view naming
         android:id="@+id/imageView2"
         android:src="@drawable/map"
         android:layout_marginBottom="75dp"
@@ -16,6 +17,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        // This should be extracted to a string resource
         android:text="Your Footsteps"
         android:id="@+id/textView6"
         android:layout_marginTop="26dp"

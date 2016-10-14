@@ -6,6 +6,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        // Extract all user-facing strings to strings.xml resource file
         android:text="People"
         android:id="@+id/textView9"
         android:layout_alignParentTop="true"
