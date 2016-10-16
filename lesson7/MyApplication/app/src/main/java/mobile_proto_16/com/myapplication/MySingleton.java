@@ -6,6 +6,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+// This should be named something descriptive, not MySingleton - this doesn't let me know what it does at all
 public class MySingleton {
     private static MySingleton mInstance;
     private RequestQueue mRequestQueue;

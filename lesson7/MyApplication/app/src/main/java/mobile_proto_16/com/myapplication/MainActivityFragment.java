@@ -40,6 +40,7 @@ public class MainActivityFragment extends Fragment {
 
     private final String TAG = this.getClass().getName();
 
+    // Remove unused functions/variables like this
     private Response.Listener<String> responseListener = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
@@ -49,6 +50,7 @@ public class MainActivityFragment extends Fragment {
         }
     };
 
+    // Remove unused functions/variables like this
     private Response.ErrorListener errorListener = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
@@ -83,8 +85,10 @@ public class MainActivityFragment extends Fragment {
                             @Override
                             public void onResponse(String response) {
                                 try {
+                                    // Comments start inline, not at the beginning of the line
 //                                    convert the response from string to json
                                     JSONObject jsonObject = new JSONObject(response);
+                                    // Comments start inline, not at the beginning of the line
 //                                    extract current price
                                     price.setText(jsonObject.getString("l_fix"));
                                 } catch (JSONException e) {
@@ -98,6 +102,7 @@ public class MainActivityFragment extends Fragment {
                     }
                 });
 //              create an instance of singleton and add the request to request queue
+                // Your singleton should be created at the top (maybe in onCreate) and used throughout, not every time you make a request
                 MySingleton singleton = MySingleton.getInstance(c);
                 singleton.addToRequestQueue(stringRequest);
             }
@@ -105,6 +110,7 @@ public class MainActivityFragment extends Fragment {
 
         return view;
     }
+    // Comments start inline, not at the beginning
 //format the company ticker to a query url
     private String buildSearchURL(String companyTicker) {
         Uri.Builder builder = new Uri.Builder();
